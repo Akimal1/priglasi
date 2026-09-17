@@ -1,23 +1,24 @@
+import Image from "next/image";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
 function Mark({ className }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 44 44"
-      fill="none"
-      className={className}
-      aria-hidden="true"
+    <span
+      className={cn(
+        "relative inline-block shrink-0 overflow-hidden rounded-full bg-white shadow-sm",
+        className,
+      )}
     >
-      <circle cx="22" cy="22" r="20.5" stroke="currentColor" strokeWidth="1" />
-      <path
-        d="M14 17.5c2.6-3 5.2-4.5 8-4.5s5.4 1.5 8 4.5"
-        stroke="currentColor"
-        strokeWidth="1"
+      <Image
+        src="/logo.jpg"
+        alt=""
+        fill
+        sizes="64px"
+        className="object-cover"
+        priority
       />
-      <path d="M22 14v16" stroke="currentColor" strokeWidth="1" />
-      <path d="M17 30h10" stroke="currentColor" strokeWidth="1" />
-    </svg>
+    </span>
   );
 }
 

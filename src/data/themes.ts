@@ -1,8 +1,10 @@
 import type { StaticImageData } from "next/image";
 import designBlackwhite from "@/assets/images/design-blackwhite.jpg";
+import designSwans from "@/assets/images/design-swans.jpg";
 
 export type ThemeKey =
   | "swans"
+  | "swans-classic"
   | "blue-envelope"
   | "blackwhite"
   | "olive"
@@ -28,25 +30,40 @@ export interface ThemeDef {
   /** Второй акцент для двухцветных декоров (опционально) */
   accent2?: string;
   photo?: StaticImageData;
+  /** Затемнение фото-обложки: "dark" (по умолч.) — контраст для светлого текста,
+   *  "light" — светлая кремовая вуаль для тёмного текста поверх светлого фото. */
+  overlay?: "dark" | "light";
 }
 
 export const themes: Record<ThemeKey, ThemeDef> = {
   swans: {
     key: "swans",
-    bg: "#f7f4ee",
-    bgSoft: "#efe6d6",
-    text: "#3c352a",
-    textMuted: "#8a7f6c",
-    accent: "#a9895a",
+    bg: "#fdfaf5",
+    bgSoft: "#f2e8d9",
+    text: "#4a3428",
+    textMuted: "#7a6552",
+    accent: "#8a5a3a",
+    accent2: "#7a4632",
+    photo: designSwans,
+    overlay: "light",
+  },
+  "swans-classic": {
+    key: "swans-classic",
+    bg: "#fdfaf6",
+    bgSoft: "#f2e8d8",
+    text: "#63402e",
+    textMuted: "#9c8672",
+    accent: "#b98d54",
+    accent2: "#63402e",
   },
   "blue-envelope": {
     key: "blue-envelope",
-    bg: "#1c2a44",
-    bgSoft: "#0f1a2e",
-    text: "#f3ead2",
-    textMuted: "#b9c3d6",
-    accent: "#d8b45c",
-    accent2: "#8fa3c4",
+    bg: "#fffdf6",
+    bgSoft: "#f3e6c8",
+    text: "#112250",
+    textMuted: "#5b6f9e",
+    accent: "#b8903f",
+    accent2: "#2a4888",
   },
   blackwhite: {
     key: "blackwhite",

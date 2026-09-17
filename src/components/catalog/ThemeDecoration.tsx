@@ -21,48 +21,32 @@ export function ThemeDecoration({ theme, accent, accent2 }: DecorationProps) {
   const par = "xMidYMid meet";
 
   switch (theme) {
-    case "swans": {
-      const feathers = [
-        { x: 12, y: 14, r: 34, o: 0.5 },
-        { x: 88, y: 20, r: 30, o: 0.4 },
-        { x: 18, y: 80, r: 26, o: 0.35 },
-        { x: 84, y: 78, r: 38, o: 0.45 },
-        { x: 50, y: 92, r: 22, o: 0.3 },
-      ];
+    case "blue-envelope": {
+      const notches = Array.from({ length: 14 }, (_, i) => i * (360 / 14));
       return (
-        <svg viewBox="0 0 100 100" preserveAspectRatio={par} className="absolute inset-0 h-full w-full" aria-hidden="true">
-          {feathers.map((f, i) => (
-            <circle key={i} cx={f.x} cy={f.y} r={f.r} fill="none" stroke={accent} strokeWidth={0.25} opacity={f.o} />
-          ))}
-          <path
-            d="M50 8 C 30 8 14 24 14 40"
-            stroke={accent}
-            strokeWidth={0.4}
-            fill="none"
-            opacity={0.5}
-          />
-          <path
-            d="M50 8 C 70 8 86 24 86 40"
-            stroke={accent}
-            strokeWidth={0.4}
-            fill="none"
-            opacity={0.5}
-          />
+        <svg viewBox="0 0 100 200" preserveAspectRatio={par} className="absolute inset-0 h-full w-full" aria-hidden="true">
+          <polygon points="6,0 50,58 94,0" fill="none" stroke={secondary} strokeWidth={0.4} opacity={0.4} />
+          <polygon points="6,0 94,0 94,200 6,200" fill="none" stroke={secondary} strokeWidth={0.3} opacity={0.25} />
+          <circle cx={9} cy={9} r={1.4} fill={secondary} opacity={0.5} />
+          <circle cx={91} cy={9} r={1.4} fill={secondary} opacity={0.5} />
+          <circle cx={9} cy={191} r={1.4} fill={secondary} opacity={0.5} />
+          <circle cx={91} cy={191} r={1.4} fill={secondary} opacity={0.5} />
+          {/* восковая печать на кончике клапана конверта */}
+          <g opacity={0.65}>
+            <circle cx={50} cy={44} r={9} fill="none" stroke={accent} strokeWidth={0.7} />
+            {notches.map((deg) => {
+              const rad = (deg * Math.PI) / 180;
+              const x1 = 50 + Math.cos(rad) * 9;
+              const y1 = 44 + Math.sin(rad) * 9;
+              const x2 = 50 + Math.cos(rad) * 10.8;
+              const y2 = 44 + Math.sin(rad) * 10.8;
+              return <line key={deg} x1={x1} y1={y1} x2={x2} y2={y2} stroke={accent} strokeWidth={0.4} />;
+            })}
+            <path d="M50 39l4 5-4 5-4-5z" fill={accent} stroke="none" />
+          </g>
         </svg>
       );
     }
-
-    case "blue-envelope":
-      return (
-        <svg viewBox="0 0 100 200" preserveAspectRatio={par} className="absolute inset-0 h-full w-full" aria-hidden="true">
-          <polygon points="6,0 50,58 94,0" fill="none" stroke={accent} strokeWidth={0.6} opacity={0.55} />
-          <polygon points="6,0 94,0 94,200 6,200" fill="none" stroke={secondary} strokeWidth={0.35} opacity={0.3} />
-          <circle cx={9} cy={9} r={1.6} fill={secondary} opacity={0.6} />
-          <circle cx={91} cy={9} r={1.6} fill={secondary} opacity={0.6} />
-          <circle cx={9} cy={191} r={1.6} fill={secondary} opacity={0.6} />
-          <circle cx={91} cy={191} r={1.6} fill={secondary} opacity={0.6} />
-        </svg>
-      );
 
     case "olive":
       return (

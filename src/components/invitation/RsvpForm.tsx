@@ -9,7 +9,7 @@ export function RsvpForm({ designSlug }: { designSlug: string }) {
   const [attending, setAttending] = useState<"yes" | "no" | "">("");
   const [guests, setGuests] = useState(1);
   const [error, setError] = useState("");
-  const [status, setStatus] = useState<"idle" | "sending" | "done">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "done" | "failed">("idle");
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -23,8 +23,8 @@ export function RsvpForm({ designSlug }: { designSlug: string }) {
     }
     setError("");
     setStatus("sending");
-    await submitRsvp({ designSlug, name: name.trim(), attending, guests });
-    setStatus("done");
+    const result = await submitRsvp({ designSlug, name: name.trim(), attending, guests });
+    setStatus(result.storedLocally ? "done" : "failed");
   }
 
   if (status === "done") {
@@ -104,6 +104,12 @@ export function RsvpForm({ designSlug }: { designSlug: string }) {
       )}
 
       {error && <p className="text-xs text-red-600">{error}</p>}
+      {status === "failed" && (
+        <p className="text-xs text-red-600">
+          Не удалось сохранить ответ в этом браузере (например, из-за приватного режима).
+          Попробуйте ещё раз или в другом браузере.
+        </p>
+      )}
 
       <button
         type="submit"

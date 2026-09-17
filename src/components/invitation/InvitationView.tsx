@@ -7,7 +7,7 @@ import { themes } from "@/data/themes";
 import { DesignScreen } from "@/components/catalog/DesignScreen";
 import { Container } from "@/components/ui/Container";
 import { useOrderModal } from "@/context/OrderModalContext";
-import { formatDateTimeLong } from "@/lib/utils";
+import { formatEventDateTimeLong } from "@/lib/utils";
 import { CountdownTimer } from "./CountdownTimer";
 import { ProgramTimeline } from "./ProgramTimeline";
 import { RsvpForm } from "./RsvpForm";
@@ -54,7 +54,7 @@ export function InvitationView({ design }: { design: Design }) {
               Дата и время
             </p>
             <p className="font-display text-2xl sm:text-3xl">
-              {formatDateTimeLong(design.demo.date)}
+              {formatEventDateTimeLong(design.demo.date)}
             </p>
           </motion.div>
 

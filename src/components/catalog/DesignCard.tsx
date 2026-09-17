@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
 import type { Design } from "@/data/designs";
@@ -25,7 +26,17 @@ export function DesignCard({ design, index = 0 }: { design: Design; index?: numb
         aria-label={`Посмотреть пример: ${design.name}`}
       >
         <PhoneFrame>
-          <DesignScreen design={design} size="compact" />
+          {design.coverImage ? (
+            <Image
+              src={design.coverImage}
+              alt=""
+              fill
+              sizes="320px"
+              className="object-cover"
+            />
+          ) : (
+            <DesignScreen design={design} size="compact" />
+          )}
         </PhoneFrame>
       </Link>
 

@@ -4,7 +4,7 @@ import { CatalogExperience } from "@/components/home/CatalogExperience";
 export const metadata: Metadata = {
   title: "Каталог приглашений",
   description:
-    "Каталог цифровых приглашений TOI INVITE: свадьба, кыз узатуу, сүннөт той, юбилей и тушоо кесүү.",
+    "Каталог цифровых приглашений priglasi_design.kg: свадьба, кыз узатуу, сүннөт той, юбилей и тушоо кесүү.",
 };
 
 export default function CatalogPage() {

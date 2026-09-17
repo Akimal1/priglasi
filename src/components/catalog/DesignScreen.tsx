@@ -4,15 +4,10 @@ import type { Design } from "@/data/designs";
 import { themes, type ThemeKey } from "@/data/themes";
 import { ThemeIcon } from "./ThemeIcon";
 import { ThemeDecoration } from "./ThemeDecoration";
-import { cn } from "@/lib/utils";
+import { cn, hexToRgba } from "@/lib/utils";
 
 function backgroundStyle(bg: string, bgSoft: string, key: ThemeKey): CSSProperties {
   switch (key) {
-    case "swans":
-      return {
-        backgroundColor: bg,
-        backgroundImage: `radial-gradient(circle at 18% 18%, ${bgSoft} 0%, transparent 42%), radial-gradient(circle at 82% 75%, ${bgSoft} 0%, transparent 48%)`,
-      };
     case "olive":
       return {
         backgroundColor: bg,
@@ -82,8 +77,18 @@ export function DesignScreen({
             sizes={isFull ? "100vw" : "320px"}
             priority={priority}
             className="object-cover"
+            style={{ objectPosition: "50% 62%" }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/25 to-black/70" />
+          {theme.overlay === "light" ? (
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `linear-gradient(180deg, ${hexToRgba(theme.bg, 0.72)} 0%, ${hexToRgba(theme.bg, 0.32)} 45%, ${hexToRgba(theme.bg, 0.78)} 100%)`,
+              }}
+            />
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/25 to-black/70" />
+          )}
         </>
       )}
 

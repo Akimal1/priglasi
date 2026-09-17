@@ -1,5 +1,7 @@
+import type { StaticImageData } from "next/image";
 import type { CategorySlug } from "./categories";
 import type { ThemeKey } from "./themes";
+import swansClassicCover from "@/assets/images/swans-classic/cover-screenshot.jpg";
 
 export interface ProgramItem {
   time: string;
@@ -27,9 +29,44 @@ export interface Design {
   theme: ThemeKey;
   description: string;
   demo: DesignDemo;
+  /**
+   * Полностью авторский шаблон со своей вёрсткой и анимациями вместо общего
+   * InvitationView/DesignScreen — сейчас используется только для "Swans"
+   * (точное воспроизведение swans-template.vercel.app). При наличии этого
+   * поля /invitations/[slug] рендерит соответствующий bespoke-компонент, а
+   * DesignCard показывает `coverImage` вместо генеративной обложки.
+   */
+  customTemplate?: "swans-classic";
+  /** Реальный скриншот готового bespoke-шаблона для карточки каталога. */
+  coverImage?: StaticImageData;
 }
 
 export const designs: Design[] = [
+  {
+    slug: "swans-classic",
+    name: "Swans",
+    category: "wedding",
+    theme: "swans-classic",
+    customTemplate: "swans-classic",
+    coverImage: swansClassicCover,
+    description:
+      "Авторская посекционная копия премиального шаблона «лебеди»: конверт из перьев, календарь-открытка, программа торжества и анкета гостя.",
+    demo: {
+      heroNames: "Данияр & Мээрим",
+      heroCaption: "Save the Date",
+      eventTypeLabel: "Свадьба",
+      date: "2027-09-18T17:00:00",
+      venueName: "Банкетный зал «Гранд Холл»",
+      venueAddress: "г. Бишкек, просп. Манаса, 40",
+      mapQuery: "Гранд Холл Бишкек",
+      program: [
+        { time: "16:00", title: "Встреча гостей" },
+        { time: "17:00", title: "Начало торжества" },
+        { time: "19:00", title: "Праздничная программа" },
+        { time: "22:00", title: "Завершение вечера" },
+      ],
+    },
+  },
   {
     slug: "white-swans",
     name: "White Swans",

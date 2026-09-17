@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { parseEventDate } from "@/lib/utils";
 
 export interface CountdownValue {
   days: number;
@@ -11,7 +12,7 @@ export interface CountdownValue {
 }
 
 function computeCountdown(targetIso: string): CountdownValue {
-  const diff = new Date(targetIso).getTime() - Date.now();
+  const diff = parseEventDate(targetIso).getTime() - Date.now();
 
   if (diff <= 0) {
     return { days: 0, hours: 0, minutes: 0, seconds: 0, isPast: true };
